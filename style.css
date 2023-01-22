@@ -16,17 +16,7 @@ body{
     grid-template-rows: repeat(16, 1fr);
     gap: 2px;
 }
-.small-grids{
-    height: 20px;
-    width: 20px;
-    color: aqua;
-}
-.bg-color{
-    background-color: aquamarine;
-}
-.my-color{
-    background-color: #fad;
-}
+
 .selection{
     display: flex;
     flex-wrap: wrap;
