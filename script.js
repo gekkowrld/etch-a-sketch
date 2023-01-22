@@ -5,4 +5,13 @@ for(let i = 0; i < 256; i++){
     squarePad.appendChild(smallGrids);
     smallGrids.setAttribute('class', 'small-grids');
 }
-console.log(squarePad.childNodes);
+
+const smallGrids = document.querySelectorAll('.small-grids');
+
+let isSketching = false;
+
+squarePad.addEventListener('mousedown', () => {
+    smallGrids.forEach(smallGrid => smallGrid.addEventListener('mouseover', () => {
+        smallGrid.style.cssText = 'background-color: green';
+    })) 
+})
