@@ -1,44 +1,76 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 body{
     height: 100vh;
     display: grid;
-    grid-template-columns: 250px auto;
-    place-items: center;
+    place-content: center;
+    font-family: 'Courier New', Courier, monospace;
 }
-.square-pad{
-    border: 2px solid #fad;
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.board{
+    width: 60vh;
+    height: 60vh;
     display: grid;
-    grid-template-columns: repeat(16, 1fr);
-    grid-template-rows: repeat(16, 1fr);
-    gap: 2px;
+    box-shadow: 4px 4px 4px #bbb;
+    cursor: grab;
 }
-
-.selection{
+h1{
+    font-family: 'Times New Roman', Times, serif;
+}
+.error{
+    color: red;
+}
+.mode{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 27px;
+}
+.buttons{
+    display: flex;
+    flex: 1;
+    gap: 10px;
+    margin: 12px;
+}
+button{
+    background-color: #fff;
+    font-family: Courier, monospace;
+    font-weight: 900;
+    font-size: 17px;
+    padding: 0.25em 1.2em;
+    border-radius: 2em;
+    cursor: pointer;
+}
+input[type="text"]{
+    width: 30px;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 5px 10px;
+    text-align: right;
+    border-radius: 7px;
+}
+.settings{
+    width: 450px;
+    align-content: space-evenly;
+    justify-content: center;
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    margin:0 30px;
-    justify-content: center;
-    align-items: center;
 }
-.selection button{
-    padding: 10px;
-    border-radius: 12px;
+.black{
+    color: #f0f8ff;
+    background-color: #000;
 }
-.top-sect{
-    border: 1px solid #daa;
-    padding: 5px;
-    display: grid;
-    place-items: center;
-    gap: 12px;
-    border-radius: 12px;
+.eraser{
+    background-color: #0000ff;
+    color: #000;
 }
-
-.reset{
-    color: #f00;
-    background-color: #deb770;
+.random{
+    background: linear-gradient(90deg,#f00, #00f);
+}
+.grey, .set-size{
+    background-color: rgb(128, 128, 128);
+}
+.reset, input[type='text']{
+    background-color: #000;
+    color: #0000ff;
 }

@@ -1,47 +1,58 @@
-const squarePad = document.querySelector('.square-pad');
-const resetBtn = document.querySelector('.reset');
-const size = document.querySelector('#size');
-const sizeValue = document.querySelector('.size-value');
-const theColor = document.querySelector('#color');
-const randomColor = document.querySelector('.random-color');
+let color = 'black';
+let click = true;
 
+function populateBoard(size){
+    let board = document.querySelector('.board');
+    let squares = board.querySelectorAll('div');
+    squares.forEach((div) => div.remove());
+    board.style.cssText = `grid-template-columns: repeat(${size}, 1fr); grid-template-rows: repeat(${size}, 1fr);`;
 
-for(let i = 0; i < 256; i++){
-    const smallGrids = document.createElement('div');
-    squarePad.appendChild(smallGrids);
-    smallGrids.setAttribute('class', 'small-grids');
+    let amount = size * size;
+    for(let i = 0; i < amount; i++){
+        let square = document.createElement('div');
+        square.addEventListener('mouseover', colorSquare)
+        square.style.backgroundColor = 'blue';
+        board.insertAdjacentElement('beforeend', square);
+    }
+}
+populateBoard(16);
+
+function changeSize(input){
+    if(input >= 2 && input <= 100){
+        populateBoard(input);
+        document.querySelector('.error').style.display = 'none';
+    }else{
+        console.log('too many squares');
+        document.querySelector('.error').textContent = "Input must be between 2 and 100";
+    }
+}
+function colorSquare(){
+    if(click){
+        if(color === 'random'){
+            this.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        }else{
+        this.style.backgroundColor = color;
+        }
+    }
 }
 
-const smallGrids = document.querySelectorAll('.small-grids');
-
-smallGrids.forEach(smallGrid => {
-    smallGrid.style.cssText = `width: ${size.value}px; height: ${size.value}px`;
-    sizeValue.innerText = `${size.value}px`;
-
-})
-
-size.addEventListener('click', () => {
-    smallGrids.forEach(smallGrid => {
-        smallGrid.style.cssText = `width: ${size.value}px; height: ${size.value}px`;
-        sizeValue.innerText = `${size.value}px`;
-    })
-})
-
-resetBtn.addEventListener('click', () => {
-    location.reload();
-})
-
-const sketch = function(e){
-    e.target.style.backgroundColor = theColor.value;
+function changeColor(choice){
+    color = choice;
 }
-const nullSketch = function(e){
-    e.target.style.backgroundColor = '';
-}
-squarePad.addEventListener('mousedown', () => {
-  smallGrids.forEach(smallGrid => smallGrid.addEventListener('mousemove', sketch));
-})
-squarePad.addEventListener('mouseup', () => {
-    smallGrids.forEach(smallGrid => smallGrid.addEventListener('mouseup', nullSketch));
-  })
-  
 
+function resetBoard(){
+    let board = document.querySelector('.board');
+    let squares = board.querySelectorAll('div');
+    squares.forEach((div) => div.style.background = 'blue');
+}
+
+document.querySelector('body').addEventListener('click', (e) => {
+    if(e.target.tagName !== 'BUTTON'){
+        click = !click;
+        if(click){
+            document.querySelector('.mode').textContent = 'Mode: Coloring';
+        }else{
+            document.querySelector('.mode').textContent = 'Mode: Not Coloring';
+        }
+    }
+})
